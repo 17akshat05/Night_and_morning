@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Goodnight & Good Morning Message</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e); /* Dark night theme */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            transition: background 1s ease-in-out; /* Smooth transition for background */
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 3.5em; /* Slightly larger for impact */
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9); /* Stronger glow for text */
+            animation: fadeIn 2s ease-in-out;
+            transition: color 1s ease-in-out, text-shadow 1s ease-in-out; /* Smooth transition for text */
+        }
+        p {
+            font-size: 1.8em; /* Slightly larger for readability */
+            margin: 10px 0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Stronger glow for text */
+            animation: fadeIn 3s ease-in-out;
+            transition: color 1s ease-in-out, text-shadow 1s ease-in-out; /* Smooth transition for text */
+        }
+        .celestial {
+            width: 120px; /* Larger celestial body */
+            height: 120px;
+            background: radial-gradient(circle, #f0e68c 50%, transparent 55%); /* Moon color */
+            border-radius: 50%;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: glow-night 4s ease-in-out infinite; /* Specific night glow */
+            z-index: 5;
+            cursor: pointer;
+            transition: background 1s ease-in-out, box-shadow 1s ease-in-out; /* Smooth transition for celestial body */
+        }
+        .flower {
+            position: absolute;
+            font-size: 1.8em; /* Slightly larger flowers */
+            animation: fall linear infinite, fadeInFlower 1s ease-out forwards; /* Added fadeInFlower */
+            color: #ff9999;
+            text-shadow: 0 0 6px rgba(255, 153, 153, 0.8); /* Stronger flower glow */
+            opacity: 0; /* Start invisible for fade-in */
+        }
+
+        /* Sun Theme */
+        body.sun-theme {
+            background: linear-gradient(to bottom, #87ceeb, #ffeb99); /* Bright day theme */
+        }
+        .sun-theme .celestial {
+            background: radial-gradient(circle, #ffa500 50%, transparent 55%); /* Sun color */
+            animation: glow-day 4s ease-in-out infinite; /* Specific day glow */
+        }
+        .sun-theme .container {
+            color: #333; /* Darker text for readability in day theme */
+        }
+        .sun-theme h1 {
+            text-shadow: 0 0 15px rgba(255, 165, 0, 0.9);
+        }
+        .sun-theme p {
+            text-shadow: 0 0 8px rgba(255, 165, 0, 0.7);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInFlower {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glow-night {
+            0%, 100% { box-shadow: 0 0 25px 8px rgba(240, 230, 140, 0.8); }
+            50% { box-shadow: 0 0 40px 15px rgba(240, 230, 140, 1); }
+        }
+        @keyframes glow-day {
+            0%, 100% { box-shadow: 0 0 25px 8px rgba(255, 165, 0, 0.8); }
+            50% { box-shadow: 0 0 40px 15px rgba(255, 165, 0, 1); }
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } /* Fall further and fade out */
+        }
+    </style>
+</head>
+<body>
+    <div class="celestial" onclick="toggleTheme()"></div>
+    <div class="container">
+        <h1 id="mainMessage">Goodnight Sweetie</h1>
+        <p id="subMessage">Dream big and rest well, my love! 🌙</p>
+    </div>
+    <script>
+        let isNight = true;
+        function toggleTheme() {
+            isNight = !isNight;
+            document.body.classList.toggle('sun-theme');
+            const mainMessage = document.getElementById('mainMessage');
+            const subMessage = document.getElementById('subMessage');
+            if (isNight) {
+                mainMessage.textContent = 'Goodnight Sweetie';
+                subMessage.textContent = 'Warm hugs tonight ❤️🌙 and rest well, my pookie ! 😘🌙';
+            } else {
+                mainMessage.textContent = 'Good Morning Sunshine';
+                subMessage.textContent = 'Smile, my pookieee pieee! muwwwhaaa bacchu 🫂☀️';
+            }
+        }
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            // Using more varied emojis for flowers
+            const flowers = ['🌸', '🌺', '🌼', '🌷'];
+            flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = Math.random() * 6 + 6 + 's'; // Longer fall duration
+            flower.style.fontSize = Math.random() * 1 + 1.5 + 'em'; // More varied flower sizes
+            flower.style.animationDelay = Math.random() * 0.5 + 's'; // Staggered start for flowers
+            document.body.appendChild(flower);
+            // Remove flower after its animation duration
+            setTimeout(() => flower.remove(), parseFloat(flower.style.animationDuration) * 1000);
+        }
+        // Create flowers more frequently
+        setInterval(createFlower, 200);
+    </script>
+</body>
+</html>
